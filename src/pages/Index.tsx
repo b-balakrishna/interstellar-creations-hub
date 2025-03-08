@@ -53,7 +53,7 @@ const Index = () => {
           clearTimeout(window.scrollTimer);
         }
         
-        // Reset effects after scrolling stops
+        // Reset effects after scrolling stops - reduced from 150ms to 50ms for faster response
         window.scrollTimer = setTimeout(() => {
           setIsScrolling(false);
           document.body.classList.remove('warp-speed');
@@ -63,7 +63,7 @@ const Index = () => {
             const element = section as HTMLElement;
             element.style.transform = '';
           });
-        }, 150);
+        }, 50); // Reduced timeout for more immediate response
       }
       
       setLastScrollTop(st <= 0 ? 0 : st);

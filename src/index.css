@@ -113,7 +113,7 @@
   /* When scrolling, create a slight tilt effect */
   @media (prefers-reduced-motion: no-preference) {
     .scroll-parallax {
-      transition: transform 0.2s ease-out;
+      transition: transform 0.15s ease-out; /* Faster transition */
     }
     
     .skill-tag {
@@ -151,17 +151,17 @@
 .warp-speed .star.small {
   transform: scale(1, 10) translateY(-20px);
   opacity: 0.9;
-  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+  transition: transform 0.2s ease-out, opacity 0.2s ease-out; /* Faster transition */
 }
 
 .warp-speed .star.medium {
   transform: scale(1, 15) translateY(-30px);
   opacity: 0.8;
-  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+  transition: transform 0.2s ease-out, opacity 0.2s ease-out; /* Faster transition */
 }
 
 .warp-speed .star.large {
   transform: scale(1, 20) translateY(-40px);
   opacity: 0.7;
-  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+  transition: transform 0.2s ease-out, opacity 0.2s ease-out; /* Faster transition */
 }
