@@ -78,19 +78,24 @@ const Skills = () => {
                     <Tooltip>
                       <TooltipTrigger asChild>
                         <span 
-                          className="skill-tag relative cursor-pointer transition-all duration-300 hover:bg-space-purple/40 hover:scale-105"
+                          className="skill-tag relative cursor-pointer transition-all duration-300 hover:bg-space-purple/40 hover:scale-105 hover:rotate-0 animate-float"
                           style={{ 
-                            animationDelay: `${(skillIndex * 0.1) + (index * 0.2)}s`,
-                            transform: `rotate(${(skillIndex % 3) - 1}deg)` 
+                            animationDelay: `${(skillIndex * 0.1) + (index * 0.3)}s`,
+                            animationDuration: `${4 + (skillIndex % 5) + (index % 3)}s`,
+                            transform: `rotate(${(skillIndex % 5) - 2}deg) translateX(${(skillIndex % 7) - 3}px) translateY(${(skillIndex % 5) - 2}px)`,
+                            position: 'relative',
+                            zIndex: 10
                           }}
                         >
                           {skill}
                         </span>
                       </TooltipTrigger>
-                      <TooltipContent className="bg-space-dark border border-space-purple/30 text-white">
-                        <div className="flex items-center space-x-2">
-                          {category.icon}
-                          <span>{skill}</span>
+                      <TooltipContent className="bg-space-dark border border-space-purple/30 text-white p-3">
+                        <div className="flex flex-col items-center space-y-2">
+                          <div className="bg-space-purple/20 p-3 rounded-full">
+                            {category.icon}
+                          </div>
+                          <span className="font-medium text-white">{skill}</span>
                         </div>
                       </TooltipContent>
                     </Tooltip>
