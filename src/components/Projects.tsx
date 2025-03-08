@@ -73,9 +73,14 @@ const Projects = () => {
           {projects.map((project, index) => (
             <div 
               key={index} 
-              className={`space-card overflow-hidden group hover:shadow-lg hover:shadow-space-purple/20 transition-all duration-300 ${
+              className={`space-card overflow-hidden group hover:shadow-lg hover:shadow-space-purple/20 transition-all duration-500 animate-float ${
                 project.featured ? 'md:col-span-2 lg:col-span-1' : ''
               }`}
+              style={{ 
+                animationDelay: `${index * 0.3}s`,
+                animationDuration: `${8 + index % 4}s`,
+                transform: `rotate(${(index % 3) - 1}deg)`
+              }}
             >
               <div className="h-48 overflow-hidden relative">
                 <img 
@@ -109,7 +114,13 @@ const Projects = () => {
                 
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.technologies.map((tech, techIndex) => (
-                    <span key={techIndex} className="text-xs bg-space-purple/10 text-space-purple/90 px-2 py-1 rounded-full">
+                    <span 
+                      key={techIndex} 
+                      className="text-xs bg-space-purple/10 text-space-purple/90 px-2 py-1 rounded-full"
+                      style={{ 
+                        animationDelay: `${(techIndex * 0.1) + (index * 0.2)}s`,
+                      }}
+                    >
                       {tech}
                     </span>
                   ))}

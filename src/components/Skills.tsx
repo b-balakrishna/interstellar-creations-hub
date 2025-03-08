@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Globe, Database, Wrench, Layers, GitBranch, Brain } from 'lucide-react';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 const Skills = () => {
   const skillCategories = [
@@ -37,7 +38,7 @@ const Skills = () => {
   ];
 
   return (
-    <section id="skills" className="py-20 relative">
+    <section id="skills" className="py-20 relative overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-32 h-32 rounded-full border border-space-purple/20 animate-spin-slow"></div>
         <div className="absolute bottom-1/3 right-1/3 w-64 h-64 rounded-full border border-space-blue/10 animate-spin-slow"></div>
@@ -56,7 +57,14 @@ const Skills = () => {
         
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {skillCategories.map((category, index) => (
-            <div key={index} className="space-card p-6 backdrop-blur-sm hover:shadow-lg hover:shadow-space-purple/10 transition-all duration-300">
+            <div 
+              key={index} 
+              className="space-card p-6 backdrop-blur-sm hover:shadow-lg hover:shadow-space-purple/10 transition-all duration-300 animate-float"
+              style={{ 
+                animationDelay: `${index * 0.2}s`,
+                animationDuration: `${6 + index % 3}s`
+              }}
+            >
               <div className="flex items-center mb-4">
                 <div className="mr-3 p-2 rounded-md bg-space-purple/10">
                   {category.icon}
@@ -66,9 +74,27 @@ const Skills = () => {
               
               <div className="flex flex-wrap gap-2">
                 {category.skills.map((skill, skillIndex) => (
-                  <span key={skillIndex} className="skill-tag">
-                    {skill}
-                  </span>
+                  <TooltipProvider key={skillIndex}>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <span 
+                          className="skill-tag relative cursor-pointer transition-all duration-300 hover:bg-space-purple/40 hover:scale-105"
+                          style={{ 
+                            animationDelay: `${(skillIndex * 0.1) + (index * 0.2)}s`,
+                            transform: `rotate(${(skillIndex % 3) - 1}deg)` 
+                          }}
+                        >
+                          {skill}
+                        </span>
+                      </TooltipTrigger>
+                      <TooltipContent className="bg-space-dark border border-space-purple/30 text-white">
+                        <div className="flex items-center space-x-2">
+                          {category.icon}
+                          <span>{skill}</span>
+                        </div>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
                 ))}
               </div>
             </div>
