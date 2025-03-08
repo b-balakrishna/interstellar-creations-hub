@@ -1,5 +1,5 @@
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 interface Star {
   x: number;
@@ -13,6 +13,7 @@ interface Star {
 
 const StarField = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [scrollY, setScrollY] = useState(0);
   
   useEffect(() => {
     const container = containerRef.current;
@@ -75,15 +76,43 @@ const StarField = () => {
       requestAnimationFrame(animateStars);
     };
     
+    // Handle scroll events for parallax effect
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+      
+      const starElements = container.querySelectorAll('.star');
+      
+      starElements.forEach((el, index) => {
+        const element = el as HTMLElement;
+        const star = stars[index];
+        if (!star) return;
+        
+        // Calculate parallax effect based on star size (bigger stars move slower)
+        const parallaxSpeed = star.size === 1 ? 0.3 : star.size === 2 ? 0.2 : 0.1;
+        const initialY = star.y;
+        
+        // Move stars in relation to scroll (small stars move faster for depth effect)
+        const newY = (initialY + (window.scrollY * parallaxSpeed * 0.1) % 100);
+        element.style.top = `${newY}%`;
+        
+        // Adjust star brightness based on scroll speed
+        const scrollDelta = Math.abs(window.scrollY - scrollY);
+        const brightnessBoost = Math.min(scrollDelta * 0.01, 0.3);
+        element.style.opacity = (newOpacity + brightnessBoost).toString();
+      });
+    };
+    
+    window.addEventListener('scroll', handleScroll);
     const animationId = requestAnimationFrame(animateStars);
     
     return () => {
+      window.removeEventListener('scroll', handleScroll);
       cancelAnimationFrame(animationId);
       while (container.firstChild) {
         container.removeChild(container.firstChild);
       }
     };
-  }, []);
+  }, [scrollY]);
   
   return <div ref={containerRef} className="star-field"></div>;
 };

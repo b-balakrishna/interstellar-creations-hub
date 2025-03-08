@@ -51,12 +51,18 @@
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply bg-space-darker text-foreground;
     background-image: 
       radial-gradient(circle at 25% 10%, rgba(139, 92, 246, 0.15) 0%, transparent 20%),
       radial-gradient(circle at 75% 30%, rgba(14, 165, 233, 0.15) 0%, transparent 25%),
       radial-gradient(circle at 50% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 30%);
+    overflow-x: hidden;
+    perspective: 1000px;
   }
 
   /* Star field effect */
@@ -68,6 +74,7 @@
     height: 100%;
     pointer-events: none;
     z-index: -1;
+    transform-style: preserve-3d;
   }
 
   .star {
@@ -77,22 +84,41 @@
     background-color: white;
     border-radius: 50%;
     opacity: 0.7;
+    transition: transform 0.1s ease-out, opacity 0.2s ease-out;
   }
 
   .star.small {
     width: 1px;
     height: 1px;
+    box-shadow: 0 0 2px rgba(255, 255, 255, 0.5);
   }
 
   .star.medium {
     width: 2px;
     height: 2px;
+    box-shadow: 0 0 3px rgba(255, 255, 255, 0.6);
   }
 
   .star.large {
     width: 3px;
     height: 3px;
-    box-shadow: 0 0 4px 1px rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 5px 1px rgba(255, 255, 255, 0.7);
+  }
+  
+  /* Scroll effect - space movement feeling */
+  .space-section {
+    transition: transform 0.3s ease-out;
+  }
+  
+  /* When scrolling, create a slight tilt effect */
+  @media (prefers-reduced-motion: no-preference) {
+    .scroll-parallax {
+      transition: transform 0.2s ease-out;
+    }
+    
+    .skill-tag {
+      transition: all 0.3s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+    }
   }
 }
 
@@ -104,6 +130,11 @@
   .space-card {
     @apply bg-space-dark/70 backdrop-blur-sm border border-space-purple/20 rounded-lg overflow-hidden;
     box-shadow: 0 0 20px rgba(139, 92, 246, 0.15);
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+  }
+  
+  .space-card:hover {
+    box-shadow: 0 0 30px rgba(139, 92, 246, 0.25);
   }
   
   .skill-tag {
@@ -114,4 +145,23 @@
     @apply absolute rounded-full border border-space-purple/20;
     animation: spin-slow 20s linear infinite;
   }
+}
+
+/* When scrolling, create warp speed effect by stretching stars */
+.warp-speed .star.small {
+  transform: scale(1, 10) translateY(-20px);
+  opacity: 0.9;
+  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+.warp-speed .star.medium {
+  transform: scale(1, 15) translateY(-30px);
+  opacity: 0.8;
+  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+.warp-speed .star.large {
+  transform: scale(1, 20) translateY(-40px);
+  opacity: 0.7;
+  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
 }

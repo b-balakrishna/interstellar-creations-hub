@@ -38,7 +38,7 @@ const Skills = () => {
   ];
 
   return (
-    <section id="skills" className="py-20 relative overflow-hidden">
+    <section id="skills" className="py-20 relative overflow-hidden scroll-parallax">
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-32 h-32 rounded-full border border-space-purple/20 animate-spin-slow"></div>
         <div className="absolute bottom-1/3 right-1/3 w-64 h-64 rounded-full border border-space-blue/10 animate-spin-slow"></div>
@@ -59,7 +59,7 @@ const Skills = () => {
           {skillCategories.map((category, index) => (
             <div 
               key={index} 
-              className="space-card p-6 backdrop-blur-sm hover:shadow-lg hover:shadow-space-purple/10 transition-all duration-300 animate-float"
+              className="space-card p-6 backdrop-blur-sm hover:shadow-lg hover:shadow-space-purple/10 transition-all duration-300 animate-float scroll-parallax"
               style={{ 
                 animationDelay: `${index * 0.2}s`,
                 animationDuration: `${6 + index % 3}s`
