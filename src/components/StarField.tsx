@@ -66,8 +66,9 @@ const StarField = () => {
           // Calculate new opacity based on sine wave
           const newOpacity = star.opacity * (0.5 + 0.5 * Math.sin(star.twinkleTime));
           
-          // Apply new opacity
-          starElements[index].style.opacity = newOpacity.toString();
+          // Apply new opacity to the HTMLElement
+          const element = starElements[index] as HTMLElement;
+          element.style.opacity = newOpacity.toString();
         }
       });
       

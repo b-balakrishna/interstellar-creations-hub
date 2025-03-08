@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Globe, Database, Tool, Layers, GitBranch, Brain } from 'lucide-react';
+import { Globe, Database, Wrench, Layers, GitBranch, Brain } from 'lucide-react';
 
 const Skills = () => {
   const skillCategories = [
@@ -16,7 +16,7 @@ const Skills = () => {
     },
     {
       name: "Tools & Technologies",
-      icon: <Tool className="h-6 w-6 text-space-purple" />,
+      icon: <Wrench className="h-6 w-6 text-space-purple" />,
       skills: ["Git", "Vite", "Postman", "ESLint", "Prettier", "Swagger"]
     },
     {
