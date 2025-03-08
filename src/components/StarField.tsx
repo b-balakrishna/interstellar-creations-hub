@@ -98,7 +98,9 @@ const StarField = () => {
         // Adjust star brightness based on scroll speed
         const scrollDelta = Math.abs(window.scrollY - scrollY);
         const brightnessBoost = Math.min(scrollDelta * 0.01, 0.3);
-        element.style.opacity = (newOpacity + brightnessBoost).toString();
+        
+        // This was the line with the error - using star's current opacity calculation instead
+        element.style.opacity = (star.opacity * (0.5 + 0.5 * Math.sin(star.twinkleTime)) + brightnessBoost).toString();
       });
     };
     

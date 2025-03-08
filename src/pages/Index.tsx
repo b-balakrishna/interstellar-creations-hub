@@ -10,6 +10,13 @@ import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import StarField from '@/components/StarField';
 
+// Add type definition for window.scrollTimer at the top level
+declare global {
+  interface Window {
+    scrollTimer: ReturnType<typeof setTimeout> | undefined;
+  }
+}
+
 const Index = () => {
   const [isScrolling, setIsScrolling] = useState(false);
   const [lastScrollTop, setLastScrollTop] = useState(0);
@@ -61,13 +68,6 @@ const Index = () => {
       
       setLastScrollTop(st <= 0 ? 0 : st);
     };
-    
-    // Add type definition for window.scrollTimer
-    declare global {
-      interface Window {
-        scrollTimer: ReturnType<typeof setTimeout> | undefined;
-      }
-    }
     
     window.addEventListener('scroll', handleScroll);
     
